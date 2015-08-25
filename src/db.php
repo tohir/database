@@ -20,17 +20,13 @@ abstract class Database
     
     public function __construct($dbServer, $dbName, $dbUser, $dbPassword, $dbPort=NULL, $dbType='mysql', $databaseSlaves=array())
     {
-        $this->db = PDOWrapper::instance();
+        $this->db = \PDOWrapper::instance();
         
         // Setup Master Connection
         $this->db->configMaster($dbServer, $dbName, $dbUser, $dbPassword, $dbPort, $dbType);
         
         // UTF8 Setup - Run on DB Master
         $this->db->query("SET NAMES 'UTF8';", array(), TRUE);
-        
-        
-        // Get Slaves
-        $databaseSlaves = AppConfig::get('database_slaves');
         
         if (!empty($databaseSlaves)) {
             foreach ($databaseSlaves as $slave)
