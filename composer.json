@@ -1,0 +1,19 @@
+{
+    "name": "tohir/database",
+    "description": "PHP Database Class will Model Loader",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "keywords": ["database"],
+    "homepage": "http://github.com/tohir/database",
+    "license": "MIT",
+    "authors": [{
+        "name": "Tohir Solomons",
+        "email": "tohir@tohir.co.za"
+    }],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
