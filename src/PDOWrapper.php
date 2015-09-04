@@ -97,7 +97,7 @@ class PDOWrapper {
 	/**
 	 * We will cache any PDO errors in case we want to get out them externally
 	 *
-	 * @var PDOException - for keeping track of any exceptions in PDO
+	 * @var \PDOException - for keeping track of any exceptions in PDO
 	 */
 	protected $pdo_exception;
 	
@@ -233,17 +233,17 @@ class PDOWrapper {
 			}
 			
 			// initialize the PDO object
-			$new_connection = new PDO($connection_string, $user, $password);
+			$new_connection = new \PDO($connection_string, $user, $password);
 			
 			// set the error mode
-			$new_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$new_connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			
 			// return the new connection
 			return $new_connection;
 		}
 		
 		// handle any exceptions by catching them and returning false
-		catch (PDOException $e) {
+		catch (\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -394,7 +394,7 @@ class PDOWrapper {
 			
 			// decide which database we are selecting from
 			$pdo_connection = $use_master ? $this->getMaster() : $this->getSlave();
-            $pdoDriver = $pdo_connection->getAttribute(PDO::ATTR_DRIVER_NAME);
+            $pdoDriver = $pdo_connection->getAttribute(\PDO::ATTR_DRIVER_NAME);
             
 			//@TODO MS SQL Server & Oracle handle LIMITs differently, for now its disabled but we should address it later.
 			$disableLimit = array("sqlsrv", "mssql", "oci");
@@ -415,12 +415,12 @@ class PDOWrapper {
 			
 			// now return the results, depending on if we want all or first row only
 			if ( !is_null($limit) && $limit == 1 ) {
-				return $pstmt->fetch(PDO::FETCH_ASSOC);
+				return $pstmt->fetch(\PDO::FETCH_ASSOC);
 			} else {
-				return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+				return $pstmt->fetchAll(\PDO::FETCH_ASSOC);
 			}
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -524,7 +524,7 @@ class PDOWrapper {
 			// if we were successful, return the amount of rows updated, otherwise return false
 			return ($successful_delete == true) ? $pstmt->rowCount() : false;
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -610,7 +610,7 @@ class PDOWrapper {
 			// if we were successful, return the amount of rows updated, otherwise return false
 			return ($successful_update == true) ? $pstmt->rowCount() : false;
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -688,7 +688,7 @@ class PDOWrapper {
 			// return the new id
 			return $newID;
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -777,7 +777,7 @@ class PDOWrapper {
 			$this->getMaster()->commit();
 			return true;
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -822,7 +822,7 @@ class PDOWrapper {
 			// only if return value is false did this query fail
 			return ($result == true) ? $pstmt->rowCount() : false;
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -863,9 +863,9 @@ class PDOWrapper {
 			$pstmt->execute();
 			
 			// now return the results
-			return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+			return $pstmt->fetchAll(\PDO::FETCH_ASSOC);
 		}
-		catch(PDOException $e) {
+		catch(\PDOException $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -915,7 +915,7 @@ class PDOWrapper {
 	 * method getError.
 	 * 	- returns the actual PDO exception
 	 */
-	public function getPDOException() {
+	public function get\PDOException() {
 		return $this->pdo_exception;
 	}
 	
@@ -925,7 +925,7 @@ class PDOWrapper {
 	 * @return boolean true, the database is supported; false, the database is not supported.
 	 */
 	private function validateDriver($driver) {
-		if (!in_array($driver, PDO::getAvailableDrivers())) {
+		if (!in_array($driver, \PDO::getAvailableDrivers())) {
 			return false;
 		} else {
 			return true;
