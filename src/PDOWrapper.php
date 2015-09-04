@@ -915,7 +915,7 @@ class PDOWrapper {
 	 * method getError.
 	 * 	- returns the actual PDO exception
 	 */
-	public function get\PDOException() {
+	public function getPDOException() {
 		return $this->pdo_exception;
 	}
 	
