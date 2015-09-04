@@ -20,7 +20,7 @@ abstract class Database
     
     public function __construct($dbServer, $dbName, $dbUser, $dbPassword, $dbPort=NULL, $dbType='mysql', $databaseSlaves=array())
     {
-        $this->db = \PDOWrapper::instance();
+        $this->db = \TohirExternal\PDOWrapper::instance();
         
         // Setup Master Connection
         $this->db->configMaster($dbServer, $dbName, $dbUser, $dbPassword, $dbPort, $dbType);

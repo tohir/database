@@ -1,4 +1,7 @@
 <?php
+
+namespace TohirExternal;
+
 /**
  * Thin PDO Wrapper: A simple database client utilizing PHP PDO.
  *
