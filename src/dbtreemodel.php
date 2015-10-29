@@ -76,10 +76,6 @@ abstract class DBTreeModel extends \Tohir\DBModel
         
         $result = $this->db->select($this->tableName, array($this->parentTreeColumn=>$parent), NULL, NULL, array($this->itemOrderColumn=>'asc'));
         
-        var_dump($result);
-        
-        //$result = $this->db->fetch_all_array('SELECT id, name FROM '.$this->tableName.' WHERE parent_id="'.$parent.'" ORDER BY name;');
-        
         foreach ($result as $row)
         {
             
@@ -91,8 +87,6 @@ abstract class DBTreeModel extends \Tohir\DBModel
         }
         // we've got the left value, and now that we've processed
         // the children of this node we also know the right value
-        //$this->db->query('UPDATE '.$this->tableName.' SET lft='.$left.', rght='.$right.', level='.$level.' WHERE id="'.$parent.'";');
-        
         $this->db->update($this->tableName, array($this->lftTreeColumn=>$left, $this->rghtTreeColumn=>$right, $this->levelTreeColumn=>$level), array('id'=>$parent));
         
         // return the right value of this node + 1
@@ -114,7 +108,6 @@ abstract class DBTreeModel extends \Tohir\DBModel
         }
         
         $where = ' WHERE ('.$this->lftTreeColumn." <{$opr} ".$node[$this->lftTreeColumn].' AND '.$this->rghtTreeColumn." >{$opr} ".$node[$this->rghtTreeColumn].')';
-        
         
         $query = 'SELECT * FROM '.$this->tableName.$where.' ORDER BY '.$this->levelTreeColumn.', '.$this->lftTreeColumn;
         
