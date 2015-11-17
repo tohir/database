@@ -143,7 +143,7 @@ class PDOWrapper {
 	 */
 	public function configMaster($host, $name, $user, $password, $port=null, $driver='mysql') {
 		if (!$this->validateDriver($driver)) {
-			throw new Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
+			throw new \Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
 		}
 
 		if (isset($this->pdo_master)) {
@@ -174,7 +174,7 @@ class PDOWrapper {
 	 */
 	public function configSlave($host, $name, $user, $password, $port=null, $driver='mysql') {
 		if (!$this->validateDriver($driver)) {
-			throw new Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
+			throw new \Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
 		}
         
 		if (isset($this->pdo_slave)) {
@@ -210,7 +210,7 @@ class PDOWrapper {
 	 */
 	protected function createConnection($driver, $host, $name, $user, $password, $port=null) {
 		if (!$this->validateDriver($driver)) {
-			throw new Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
+			throw new \Exception('DATABASE WRAPPER::error, the database you wish to connect to is not supported by your install of PHP.');
 		}
         
 		// attempt to create pdo object and connect to the database
@@ -250,7 +250,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -427,7 +427,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -531,7 +531,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -617,7 +617,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -695,7 +695,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -785,7 +785,7 @@ class PDOWrapper {
 			$this->getMaster()->rollback();
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -829,7 +829,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}
@@ -872,7 +872,7 @@ class PDOWrapper {
 			$this->pdo_exception = $e;
 			return false;
 		}
-		catch(Exception $e) {
+		catch(\Exception $e) {
 			if (self::$LOG_ERRORS == true) {
 				error_log('DATABASE WRAPPER::'.print_r($e, true));
 			}

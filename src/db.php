@@ -48,7 +48,7 @@ abstract class Database
             $object = new $className($this->db);
             return $object;
             
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             die('Unable to load model - '.$modelName);
         }
     }
