@@ -940,4 +940,23 @@ class PDOWrapper {
 		unset($this->pdo_master);
 		unset($this->pdo_slave);
 	}
+	
+    /**
+     * Escape strings
+     */
+    public function quote($string)
+    {
+        return $this->pdo_master->quote($string);
+    }
+    
+    /**
+     * Convert an array to escaped string
+     */
+    public function arrayToString(array $array)
+    {
+        // Source: https://www.sitepoint.com/community/t/php-pdo-prepared-statements-with-in-clause/12052/4
+        array_walk($array, function( &$value ) { $value = $this->quote($value); });
+        
+        return implode(',', $array);
+    }
 }
