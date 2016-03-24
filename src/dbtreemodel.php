@@ -87,7 +87,7 @@ abstract class DBTreeModel extends \Tohir\DBModel
         }
         // we've got the left value, and now that we've processed
         // the children of this node we also know the right value
-        $this->db->update($this->tableName, array($this->lftTreeColumn=>$left, $this->rghtTreeColumn=>$right, $this->levelTreeColumn=>$level), array('id'=>$parent));
+        $this->db->update($this->tableName, array($this->lftTreeColumn=>$left, $this->rghtTreeColumn=>$right, $this->levelTreeColumn=>$level), array($this->primaryKey=>$parent));
         
         // return the right value of this node + 1
         return $right+1;
