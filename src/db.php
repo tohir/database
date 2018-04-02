@@ -26,7 +26,7 @@ abstract class Database
         $this->db->configMaster($dbServer, $dbName, $dbUser, $dbPassword, $dbPort, $dbType);
         
         // UTF8 Setup - Run on DB Master
-        $this->db->query("SET NAMES 'UTF8';", array(), TRUE);
+        $this->db->execute("SET NAMES 'UTF8';", array(), TRUE);
         
         if (!empty($databaseSlaves)) {
             foreach ($databaseSlaves as $slave)
