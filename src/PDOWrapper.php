@@ -351,7 +351,7 @@ class PDOWrapper {
 	 * @param bool $use_master (optional) - use the master db for this read
 	 * @return mixed - associate representing the fetched table row, false on failure
 	 */
-	public function select($table, $params = null, $limit = null, $start = null, $order_by=null, $use_master = false) {
+	public function select($table, $params = [], $limit = null, $start = null, $order_by = [], $use_master = false) {
 		// building query string
 		$sql_str = "SELECT * FROM $table";
 		// append WHERE if necessary
