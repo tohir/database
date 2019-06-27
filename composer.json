@@ -1,6 +1,6 @@
 {
     "name": "tohir/database",
-    "description": "PHP Database Class will Model Loader",
+    "description": "PHP Database Class with Model Loader",
     "require": {
         "php": ">=5.3.0"
     },
