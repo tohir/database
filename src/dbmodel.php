@@ -143,7 +143,7 @@ abstract class DBModel
         $result = $this->db->update($this->tableName, $data, array($this->primaryKey => $id));
         
         // Run the Hook
-        $result = $this->hook_after_update($result, $data);
+        $result = $this->hook_after_update($id, $result, $data);
         
         return $result;
     }
@@ -180,14 +180,18 @@ abstract class DBModel
     
     /**
      * Hook to run after adding a new record
+     * @param int $id Primary Key Value
      * @param boolean $result Update result
      * @param array $data List of Fields and Values
      */
-    protected function hook_after_update($result, $data)
+    protected function hook_after_update($id, $result, $data)
     {
         return $result;
     }
     
+    /**
+     * Method to get the number of records
+     */
     public function getRecordCount()
     {
         $query = 'SELECT count('.$this->primaryKey.') AS count FROM '.$this->tableName;
@@ -225,10 +229,12 @@ abstract class DBModel
         return $returnArray;
     }
     
+    /**
+     * Method to get the last DB Error Message
+     */
     public function getErrorMessage()
     {
         return $this->db->getErrorMessage();
     }
-    
     
 }
