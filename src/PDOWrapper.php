@@ -355,7 +355,7 @@ class PDOWrapper {
 		// building query string
 		$sql_str = "SELECT * FROM $table";
 		// append WHERE if necessary
-		$sql_str .= ( count($params)>0 ? ' WHERE ' : '' );
+		$sql_str .= ( empty($params) ? '' : ' WHERE ' );
 		
 		$add_and = false;
 		// add each clause using parameter array
